@@ -1,7 +1,7 @@
 {
-  "name": "sit725-2022-t1-prac3",
+  "name": "sit725-2022-t1-prac4",
   "version": "1.0.0",
-  "description": "practical week3",
+  "description": "practical week4",
   "main": "server.js",
   "scripts": {
     "start": "node run server.js",
@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kanchandee/sit725-2022-t1-prac3.git"
+    "url": "git+https://github.com/kanchandee/sit725-2022-t1-prac4.git"
   },
   "author": "kanchan",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/kanchandee/sit725-2022-t1-prac3/issues"
+    "url": "https://github.com/kanchandee/sit725-2022-t1-prac4/issues"
   },
-  "homepage": "https://github.com/kanchandee/sit725-2022-t1-prac3#readme",
+  "homepage": "https://github.com/kanchandee/sit725-2022-t1-prac4#readme",
   "dependencies": {
     "express": "^4.17.3",
     "nodemon": "^2.0.15"
