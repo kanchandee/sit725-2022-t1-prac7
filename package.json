@@ -18,7 +18,9 @@
   },
   "homepage": "https://github.com/kanchandee/sit725-2022-t1-prac4#readme",
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.17.3",
+    "mongodb": "^4.4.1",
     "nodemon": "^2.0.15"
   }
 }

@@ -1,11 +1,63 @@
-var express = require("express") 
-var app = express() 
+const express = require("express");
+const cors = require("cors");
+const app = express();
 
-app.use(express.static(__dirname+'/public')) 
-app.use(express.json()); 
-app.use(express.urlencoded({ extended: false })); 
+const MongoClient = require("mongodb").MongoClient;
+// Connect to the database
+const uri = "mongodb+srv://admin:kanchan98765@cluster0.pakvj.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+const client = new MongoClient(uri, { useNewUrlParser: true });
+let projectCollection;
 
-var port = process.env.port || 3000; 
-app.listen(port,()=>{ 
-console.log("App listening to: "+port) 
-})
+app.use(express.static(__dirname + '/public'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cors());
+
+const getProjects = (callback) => {
+    projectCollection.find({}).toArray(callback);
+};
+
+const insertProject = (project, callback) => {
+    projectCollection.insert(project, callback);
+};
+
+const createCollection = (collectionName) => {
+    client.connect((err, db) => {
+        projectCollection = client.db().collection(collectionName);
+        if (!err) {
+            console.log("Successfully created or acquired collection.");
+        } else {
+            console.error("Database error: " + err);
+            process.exit(1);
+        }
+    });
+};
+
+
+app.get('/api/projects', (req, res) => {
+    getProjects((err, result) => {
+        if (err) {
+            res.json({ statusCode: 400, message: err });
+        } else {
+            res.json({ statusCode: 200, message: "Success", data: result });
+        }
+    });
+});
+
+app.post('/api/projects', (req, res) => {
+    let project = req.body;
+    insertProject(project, (err, result) => {
+        if (err) {
+            res.json({ statusCode: 400, message: err });
+        } else {
+            res.json({ statusCode: 200, message: "Successfully added new project", data: result });
+        }
+    });
+});
+
+const port = 3000;
+
+app.listen(port, () => {
+    console.log("App listening to: " + port);
+    createCollection("pets");
+});
